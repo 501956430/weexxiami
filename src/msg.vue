@@ -1,9 +1,11 @@
 <template>
-    <scroller style="background-color: #F8F8F8;" append="tree">
-        <refresh class="refresh-view" :display="refresh_display" @refresh="onrefresh">
-            <img id="roate" ref="roate" src="http://gw.alicdn.com/bao/uploaded/TB1xDrVNFXXXXbEXFXXXXXXXXXX-48-48.png" style="width: 50px;height: 50px;"></img>
+    <div>
+    <list style="background-color: #F8F8F8;height: 1200" >
+        <refresh class="refresh" @refresh="onrefresh" @pullingdown="onpullingdown" :display="refreshing ? 'show' : 'hide'">
+            <loading-indicator class="indicator"></loading-indicator>
+            <text class="refreshText">{{refreshText}}</text>
         </refresh>
-        <div style="background-color: white">
+        <cell style="background-color: white">
             <div style="height: 150;flex-direction:row;justify-content:center;align-items:center;border-bottom-color: #EEEEEE;border-bottom-width: 1;">
                 <div style="flex: 0.3;margin-left: 20;">
                     <image style="width: 50;height: 50" :src="path+'/msg1.png'"/>
@@ -40,8 +42,9 @@
                     <image style="width: 30;height: 30" :src="path+'/open_icon.png'"/>
                 </div>
             </div>
-        </div>
-    </scroller>
+        </cell>
+    </list>
+    </div>
 </template>
 
 <script>
@@ -49,30 +52,45 @@
     export default {
         data: {
             refresh_display: 'hide',
+            refreshText: '↓   pull to refresh...',
             path:api.apiurl.path,
         },
         methods: {
-            onrefresh: function(e) {
-                var self = this;
-                self.refresh_display = 'show';
-                setTimeout(function () {
-                    self.refresh_display = 'hide';
-                }, 3000)
+            onrefresh (event) {
+                this.refreshing = true;
+                this.refreshText = "loading...";
+                setTimeout(() => {
+                    this.refreshing = false;
+                    this.refreshText = '↓   pull to refresh...';
+                }, 2000)
+            },
+            onpullingdown (event) {
+                if (event.pullingDistance < -84) {
+                    this.refreshText = '↑   release to refresh...';
+                } else {
+                    this.refreshText = '↓   pull to refresh...';
+                }
             }
         }
     }
 </script>
 
 <style>
-    .refresh-view {
-        height: 120px;
-        width: 750px;
-        display: -ms-flex;
-        display: -webkit-flex;
-        display: flex;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        -webkit-box-align: center;
+    .indicator {
+        color: #888888;
+        height: 40;
+        width: 40;
+        margin-right: 30;
+    }
+    .refresh {
+        height: 128;
+        width: 750;
+        flex-direction: row;
         align-items: center;
+        justify-content: center;
+    }
+    .refreshText {
+        color: #888888;
+        font-weight: bold;
     }
 </style>
