@@ -57,18 +57,19 @@
         },
         methods: {
             onrefresh (event) {
-                this.refreshing = true;
-                this.refreshText = "loading...";
+                var thls=this;
+                thls.refreshing = true;
+                thls.refreshText = "正在刷新";
                 setTimeout(() => {
-                    this.refreshing = false;
-                    this.refreshText = '↓   pull to refresh...';
+                    thls.refreshing = false;
+                    thls.refreshText = '↓   下拉可以刷新...';
                 }, 2000)
             },
             onpullingdown (event) {
                 if (event.pullingDistance < -84) {
-                    this.refreshText = '↑   release to refresh...';
+                    this.refreshText = '↑   松开立即刷新...';
                 } else {
-                    this.refreshText = '↓   pull to refresh...';
+                    this.refreshText = '↓   下拉可以刷新...';
                 }
             }
         }
