@@ -62,14 +62,20 @@
                 thls.refreshText = "正在刷新";
                 setTimeout(() => {
                     thls.refreshing = false;
-                    thls.refreshText = '↓   下拉可以刷新...';
+                    thls.refreshText = '↓ 下拉可以刷新...';
                 }, 2000)
             },
             onpullingdown (event) {
-                if (event.pullingDistance < -84) {
-                    this.refreshText = '↑   松开立即刷新...';
+                if (event.pullingDistance < -100) {
+                    if(this.refreshText != '正在刷新') {
+
+                        this.refreshText = '↑ 松开立即刷新';
+                    }
                 } else {
-                    this.refreshText = '↓   下拉可以刷新...';
+                    if(this.refreshText != '正在刷新') {
+                        this.refreshText = '↓ 下拉可以刷新';
+                    }
+
                 }
             }
         }
@@ -81,10 +87,12 @@
         color: #888888;
         height: 40;
         width: 40;
-        margin-right: 30;
+        margin-right: 10;
+        justify-content: center;
+        align-items: center;
     }
     .refresh {
-        height: 128;
+        height: 100;
         width: 750;
         flex-direction: row;
         align-items: center;
@@ -93,5 +101,6 @@
     .refreshText {
         color: #888888;
         font-weight: bold;
+        font-size: 25;
     }
 </style>
