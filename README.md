@@ -39,3 +39,6 @@ npm run debug
 ## notes
 
 You can config more babel, ESLint and PostCSS plugins in `webpack.config.js`.
+
+
+![图](https://github.com/501956430/weexxiami/blob/master/resources/images/%5BAirplayer%5D%5B2017-6-30-18-0-41%5D%5B556x990%5D.gif) 
