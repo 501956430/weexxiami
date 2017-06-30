@@ -4,7 +4,7 @@
     <!-- 搜索-->
     <div style="flex-direction: row;height: 60;top: 20;">
       <div style="flex-direction: row;margin-left:30;flex: 1;justify-content: flex-start;align-items: center;border-radius: 50;background-color: rgb(233,233,233)">
-        <image style="height: 40;width: 40;margin-left: 20" :src="path+'/ic_search_gray2.png'"></image>
+        <image style="height: 40;width: 40;margin-left: 20" :src="path+'/ic_search_gray.png'"></image>
         <input placeholder="音乐基因拯救计划" style="font-size:25;margin-left:5;color:gray;height:60;width: 500"/>
       </div>
       <div style="flex: 0.2;justify-content: center;align-items: center">
@@ -48,8 +48,8 @@
           <div style="flex:0.01;height: 50;background-color: rgb(239,118,0)"></div>
           <text style="flex: 1;margin-left: 10;color: #535353;">必听歌单</text>
           <div style="flex: 0.2;flex-direction: row;justify-content: center;align-items: center">
-            <text style="color: rgb(239,118,0)">更多</text>
-            <image style="width: 40;height: 40" :src="path+'/switch_play.png'"></image>
+            <text style="color: rgb(239,118,0);font-size: 25">更多</text>
+            <image style="width: 30;height: 30" :src="path+'/switch_play.png'"></image>
           </div>
         </div>
         <!--歌单-->
@@ -75,8 +75,8 @@
         <div style="flex:0.01;height: 50;background-color: rgb(239,118,0)"></div>
         <text style="flex: 1;margin-left: 10;color: #535353;">新歌推荐</text>
         <div style="flex: 0.2;flex-direction: row;justify-content: center;align-items: center">
-          <text style="color: rgb(239,118,0)">更多</text>
-          <image style="width: 40;height: 40" :src="path+'/switch_play.png'"></image>
+          <text style="color: rgb(239,118,0);font-size: 25">更多</text>
+          <image style="width: 30;height: 30" :src="path+'/switch_play.png'"></image>
         </div>
       </div>
       <div style="flex-direction: column;margin-left: 10;margin-top: 30">
@@ -143,6 +143,30 @@
 
       </div>
 
+      <div style="margin-top: 30;">
+        <div style="flex-direction: row;height: 40;margin-left: 10;justify-content: center;align-items: center">
+          <div style="flex:0.01;height: 50;background-color: rgb(239,118,0)"></div>
+          <text style="flex: 1;margin-left: 10;color: #535353;">新碟首发</text>
+          <div style="flex: 0.2;flex-direction: row;justify-content: center;align-items: center">
+            <text style="color: rgb(239,118,0);font-size: 25">更多</text>
+            <image style="width: 30;height: 30" :src="path+'/switch_play.png'"></image>
+          </div>
+        </div>
+        <!--歌单-->
+        <div style="flex-direction: column" v-for="colList in muisdlistcolsize">
+          <div style="flex-direction: row;margin-left: 10;margin-top: 20;height: 310;">
+            <div  v-for="(bcs,index) in muisdlist" >
+              <div style="flex: 1;margin-right: 6;" v-if="index>=((colList-1)*3) && index <(colList*3)">
+                <image style="height: 240;width: 240" :src="bcs.icon"/>
+                <div style="justify-content: flex-start;width: 240;margin-left: 10">
+                  <text style="color: #ACACAC;font-size: 25;">{{bcs.title}}</text>
+                  <text style="font-size: 25;margin-top: 10">{{bcs.tag}}</text>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </div>
 
